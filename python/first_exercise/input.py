@@ -1,3 +1,3 @@
 def ler_entrada() -> str:
-    entrada:str = input("\nForneça um número para a lista ou digite 0 para sair: ")
+    entrada: str = input("\nForneça números inteiros para comporem uma lista (0 encerra a lista para executar cálculos): ")
     return entrada
