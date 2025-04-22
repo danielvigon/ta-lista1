@@ -1,46 +1,40 @@
 import input, validator, storage, calculation
 
-indice_lista: int = 0
-total_adicao: int = 0
-total_multiplicacao: int = 1
-numeros_inteiros: list[int] = []
-numeros_duplicados: list[int] = []
-numeros_impares: list[int] = []
-numeros_pares: list[int] = []
-numeros_primos: list[int] = []
+entrada: list[int] = []
+adicao: list[int] = []
+multiplicacao: list[int] = []
+duplicados: list[int] = []
+impares: list[int] = []
+pares: list[int] = []
+primos: list[int] = []
 
 
 def executar_rotina_entrada(lista: list[int]):
     entrada: str = input.ler_entrada()
     numero: int = validator.validar_entrada(entrada)
-    match numero:
-        case 0:
-            print(f"\n\n\tLista de números inteiros: {lista}")
-        case None:
+    if entrada == '0':
+            pass
+    elif numero == 0:
             executar_rotina_entrada(lista)
-        case _:
-            storage.armazenar_entrada(numero, lista)
+    else:
+            storage.armazenar_parametro(numero, lista)
             executar_rotina_entrada(lista)
 
-def executar_rotina_calculo(lista: list[int], indice: int, adicao: int, multiplicacao: int):
-    iterar_adicao(lista, indice, adicao)
-    iterar_multiplicacao(lista, indice, multiplicacao)
+def executar_rotina_calculo(entrada: list[int], adicao: list[int], mutiplicacao: list[int], duplicados: list[int], impares: list[int], pares: list[int], primos: list[int]):
+    if entrada:
+        storage.armazenar_parametro(calculation.obter_adicao(entrada), adicao)
+        storage.armazenar_parametro(calculation.obter_multiplicacao(entrada), mutiplicacao)
 
-def iterar_adicao(lista: list[int], indice: int, total: int):
-    total = calculation.obter_adicao(lista, indice, total)
-    if indice != lista.index(lista[-1]):
-        indice += 1
-        iterar_adicao(lista, indice, total)
-    else:
-        print(f"\tTotal sobre adição: {total}")
+def exibir_listas(entrada: list[int], adicao: list[int], multiplicacao: list[int], duplicados: list[int], impares: list[int], pares: list[int], primos: list[int]):
+      print(f"\n\nRol de entrada: {entrada}")
+      print(f"Total de adição: {adicao}")
+      print(f"Total de multiplicação: {multiplicacao}")
+      print(f"Lista de duplicados: {duplicados}")
+      print(f"Lista de ímpares: {impares}")
+      print(f"Lista de pares: {pares}")
+      print(f"Lista de primos: {primos}")
 
-def iterar_multiplicacao(lista: list[int], indice: int, total: int):
-    total = calculation.obter_multiplicacao(lista, indice, total)
-    if indice != lista.index(lista[-1]):
-        indice += 1
-        iterar_multiplicacao(lista, indice, total)
-    else:
-        print(f"\tTotal sobre multiplicação: {total}")
 
-executar_rotina_entrada(numeros_inteiros)
-executar_rotina_calculo(numeros_inteiros, indice_lista, total_adicao, total_multiplicacao)
+executar_rotina_entrada(entrada)
+executar_rotina_calculo(entrada, adicao, multiplicacao, duplicados, impares, pares, primos)
+exibir_listas(entrada, adicao, multiplicacao, duplicados, impares, pares, primos)

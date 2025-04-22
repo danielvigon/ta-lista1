@@ -4,5 +4,5 @@ def validar_entrada(entrada: str) -> int:
         return numero
     except ValueError:
         print("\nNão foi possível identificar um número inteiro."
-              "\nTente novamente.")
-        return None
+              "\nForneça novamente.")
+        return 0
