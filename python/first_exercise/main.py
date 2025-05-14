@@ -24,6 +24,14 @@ def executar_rotina_calculo(entrada: list[int], adicao: list[int], mutiplicacao:
     if entrada:
         storage.armazenar_parametro(calculation.obter_adicao(entrada), adicao)
         storage.armazenar_parametro(calculation.obter_multiplicacao(entrada), mutiplicacao)
+        lista_duplicados: list[int] = calculation.obter_duplicados(entrada)
+        print(lista_duplicados)
+        lista_impares: list[int] = calculation.obter_impares(entrada)
+        print(lista_impares)
+        lista_pares: list[int] = calculation.obter_pares(entrada)
+        print(lista_pares)
+        lista_primos: list[int] = calculation.obter_primos(entrada)
+        print(lista_primos)
 
 def exibir_listas(entrada: list[int], adicao: list[int], multiplicacao: list[int], duplicados: list[int], impares: list[int], pares: list[int], primos: list[int]):
       print(f"\n\nRol de entrada: {entrada}")
