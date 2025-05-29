@@ -1,48 +1,28 @@
-import input, validator, storage, calculation
+from input_model import InputModel
+from container_model import ContainerModel
+from calculation_helper import CalculationHelper
 
-entrada: list[int] = []
-adicao: list[int] = []
-multiplicacao: list[int] = []
-duplicados: list[int] = []
-impares: list[int] = []
-pares: list[int] = []
-primos: list[int] = []
+class Main:
 
+    def __init__(self):
+        self.input_instance: InputModel = InputModel()
+        self.inputs_container: list[int] = self.input_instance.var_inputs
+        self.container_instance: ContainerModel = ContainerModel()
+        self.calculation_instance: CalculationHelper = CalculationHelper()
 
-def executar_rotina_entrada(lista: list[int]):
-    entrada: str = input.ler_entrada()
-    numero: int = validator.validar_entrada(entrada)
-    if entrada == '0':
-            pass
-    elif numero == 0:
-            executar_rotina_entrada(lista)
-    else:
-            storage.armazenar_parametro(numero, lista)
-            executar_rotina_entrada(lista)
+    def execute_input(self):
+        self.input_instance.execute_routine()
+        
+    def execute_calculation(self):
+        if self.inputs_container:
+            self.container_instance.total_sum = self.calculation_instance.get_addition(self.inputs_container)
+            self.container_instance.total_product = self.calculation_instance.get_multiplication(self.inputs_container)
 
-def executar_rotina_calculo(entrada: list[int], adicao: list[int], mutiplicacao: list[int], duplicados: list[int], impares: list[int], pares: list[int], primos: list[int]):
-    if entrada:
-        storage.armazenar_parametro(calculation.obter_adicao(entrada), adicao)
-        storage.armazenar_parametro(calculation.obter_multiplicacao(entrada), mutiplicacao)
-        lista_duplicados: list[int] = calculation.obter_duplicados(entrada)
-        print(lista_duplicados)
-        lista_impares: list[int] = calculation.obter_impares(entrada)
-        print(lista_impares)
-        lista_pares: list[int] = calculation.obter_pares(entrada)
-        print(lista_pares)
-        lista_primos: list[int] = calculation.obter_primos(entrada)
-        print(lista_primos)
-
-def exibir_listas(entrada: list[int], adicao: list[int], multiplicacao: list[int], duplicados: list[int], impares: list[int], pares: list[int], primos: list[int]):
-      print(f"\n\nRol de entrada: {entrada}")
-      print(f"Total de adição: {adicao}")
-      print(f"Total de multiplicação: {multiplicacao}")
-      print(f"Lista de duplicados: {duplicados}")
-      print(f"Lista de ímpares: {impares}")
-      print(f"Lista de pares: {pares}")
-      print(f"Lista de primos: {primos}")
+    def main(self):
+        self.execute_input()
+        self.execute_calculation()
+        self.container_instance.show_lists()
 
 
-executar_rotina_entrada(entrada)
-executar_rotina_calculo(entrada, adicao, multiplicacao, duplicados, impares, pares, primos)
-exibir_listas(entrada, adicao, multiplicacao, duplicados, impares, pares, primos)
+if __name__ == "__main__":
+    Main().main()
